@@ -1,0 +1,52 @@
+"PrfLib" is a collection of experimental programs supporting the
+new profile format and search method of PROSITE and NUCSITE.
+
+Version 1.0 contains ANSI C source code and manual pages for
+the following programs:
+
+   scan4prf
+   srch4prf
+
+These programs have successfully been compiled and tested under
+SunOS, Solaris, OSF1, IRIX, MacOS operating systems.
+
+In order to compile the programs, type:
+
+   make
+
+This will create the two binaries listed above. You may now move these
+binaries as well as the corresponding manual pages in:
+ 
+   scan4prf.1
+   srch4prf.1
+
+to more appropriate directories.  
+ 
+Further included in this release are seven demo data files:
+
+   CVPBR322 
+   GTPA_HUMAN
+   ecp.prf
+   prosite13.prf
+   sh3.prf
+   sh3.seq
+
+a test script: 
+
+   test.csh 
+
+and a test ouput file. 
+
+   test.out
+
+To test the programs, type: 
+
+   ( csh test.csh ) > out 
+   diff test.out out 
+
+Please send bug reports to:
+
+   Nicolas Moeri
+   E-mail: nmoeri@dma.epfl.ch  
+
+Nicolas Moeri, October 30 1996  

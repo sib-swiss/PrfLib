@@ -1,0 +1,88 @@
+.TH SRCH4PRF  1 "October 1996"
+.SH NAME
+srch4prf \- scan a protein or DNA sequence with a profile library 
+.SH SYNOPSIS
+.B srch4prf
+-s seq_library_file [-p profile_file] [-i profile_ID] [-l cut_off_level]
+[-o output_File] [-a] [-b] [-y] [-u] [-f] [-b] [-t] [-x]
+.SH DESCRIPTION
+.B srch4prf 
+compares a protein or nucleic acid sequence against a profile library. 
+The result is an unsorted list of profile-sequence matches written to
+the standard output. If no parameters are specified on the command line,
+parameters are taken from the file "srch4prf.par".
+.I seq_library_file
+contains a sequence in EMBL/SWISS-PROT format.
+.I profile_file 
+contains a library of profiles in PROSITE/NUCSITE format.
+If not specified, file "PROSITE.DAT" is used.
+.I profile_ID
+contains the profile ID.
+If specified just align the sequence with the specified profile.
+.I cut_off_level
+Cut-off level.
+If specified, -u or -a must be unused.
+If not specified, level zero is used.
+.I output_File
+is the output file, by default the standard output.
+.SH OPTIONS 
+.TP
+\-f
+Input sequence-library is in Pearson/Fasta format.
+.TP
+\-a
+Report optimal alignment scores for all sequences regardless of the cut-off 
+value.
+.TP
+\-y
+Display alignments between the profile and the matched sequence regions in 
+a human-friendly format.
+If used, -x must be unused.
+.TP
+\-u
+Forces DISJOINT=UNIQUE. 
+.TP
+\-b
+Search the complementary strands of DNA sequences as well.
+.TP
+\-t
+Test unprotected alignments.
+If used, -u must be unused.
+.TP
+\-x
+Reports the coordinates of the alignments.  
+If used, -y must be unused.
+.SH EXAMPLES
+.TP
+(1)
+.B srch4prf
+-s GTPA_HUMAN -p prosite13.prf
+
+Scans the human GAP protein for matches to profiles in PROSITE 
+release 13. 
+GTPA_HUMAN contains the SWISS-PROT entry P20936|GTPA_HUMAN.
+prosite13.prf contains all profile entries of PROSITE release 13.  
+The output is a Pearson/Fasta-formatted sequence library containing 
+all sequence regions of the input sequence matching a profile in the 
+profile library. 
+.TP
+(2)
+.B srch4prf
+-s CVPBR322 -p ecp.prf -b -y -l 2
+
+Scans both strands of plasmid PBR322 for high-scoring (level 2) 
+.I E. coli
+promoter matches.   
+CVPBR322 contains EMBL entry J01749|CVPBR322.
+ecp.prf contains a profile for
+.I E. coli  
+promoters.
+The output includes profile-sequence alignments in a human-friendly
+format. 
+.SH BUGS
+.B srch4prf
+neither supports circular profiles nor circular sequences.
+.SH AUTHOR
+Nicolas Moeri
+.br
+moeri@dma.epfl.ch

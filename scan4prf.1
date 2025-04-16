@@ -1,0 +1,94 @@
+.TH SCAN4PRF 1 "October 1996"
+.SH NAME
+scan4prf \- search a protein or DNA sequence library for sequence segments 
+matching a profile
+.SH SYNOPSIS
+.B scan4prf 
+-s seq_library_file  [-p profile_file] [-i profile_ID]
+[-l cut_off_level] [-c cut_off_value] [-n normalization_mode]
+[-o output_file] [-f] [-a] [-b] [-y] [-u] [-t]
+.SH DESCRIPTION
+.B pfsearch 
+compares a query profile against a DNA or protein sequence library. The 
+result is an unsorted list of profile-sequence matches written to the 
+standard output. If no parameters are specified on the command line,
+parameters are taken from the file "scan4prf.par".
+.I seq_library_file
+contains a sequence library in EMBL/SWISS-PROT format (assumed by default) 
+or in Pearson/Fasta format (indicated by option -f).
+.I profile_file 
+contains a profile in PROSITE/NUCSITE format.
+If not specified, file "PROSITE.DAT" is used.
+.I profile_ID
+contains the profile ID.
+If not specified, the first profile in profile_file is used.
+.I cut_off_level
+Cut-off level.
+If used, -u or -a, and -c must be unused.
+If not specified, level zero is used.
+.I cut_off_value
+Cut-off value.
+An integer argument is interpreted as a raw score value, a decimal argument 
+as a normalized score value.
+If used, -u or -a, and -l must be unused.
+.I normalization_mode
+Normalization mode of the given cut-off value.
+-c must be used with a normalized score value.
+.I output_File
+is the output file, by default the standard output.
+.SH OPTIONS 
+.TP
+\-f
+Input sequence-library is in Pearson/Fasta format.
+.TP
+\-a
+Report optimal alignment scores for all sequences regardless of the cut-off 
+value.
+.TP
+\-b
+Search the complementary strands of DNA sequences as well.
+.TP
+\-y
+Display alignments between the profile and the matched sequence regions in 
+a human-friendly format.
+.TP
+\-u
+Forces DISJOINT=UNIQUE.
+.TP
+\-o
+Output file.
+.TP
+\-t
+Test unprotected alignments.
+-u must be unused.
+.SH EXAMPLES
+.TP
+(1)
+.B scan4prf
+-s sh3.seq -p sh3.prf -f -c 6.0
+
+Searches the Pearson/Fasta-formatted protein sequence library sh3.seq for 
+SH3 domains with a cut-off value of 6.0 normalized score units. sh3.seq 
+contains 20 SH3 domain-containing protein sequences from SWISS-PROT release 
+32.
+sh3.prf contains the PROSITE entry SH3/PS50002.
+.TP
+(2)
+.B scan4prf
+-s CVPBR322 -p ecp.prf -b -y
+
+Generates a multiple sequence alignment of potential
+.I E. coli
+promoters on both strands of plasmid pBR322.
+ecp.prf contains a profile for
+.I E. coli   
+promoters.  
+CVPBR322 contains EMBL entry J01749|CVPBR322.
+
+.SH BUGS
+.B scan4prf 
+neither supports circular profiles nor circular sequences.
+.SH AUTHOR
+Nicolas Moeri
+.br
+moeri@dma.epfl.ch
